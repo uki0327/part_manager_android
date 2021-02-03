@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 class PartAdapter(private val resultList: ArrayList<Part>, val myListener: MainActivity) :
     RecyclerView.Adapter<PartAdapter.PartViewHolder>() {
 
-
-
     inner class PartViewHolder(partView: View) : RecyclerView.ViewHolder(partView), View.OnClickListener {
         private val partList: ConstraintLayout = partView.findViewById(R.id.part_list)
         val partName: TextView = partView.findViewById(R.id.part_name)
@@ -27,10 +25,6 @@ class PartAdapter(private val resultList: ArrayList<Part>, val myListener: MainA
             val position = adapterPosition
             resultList[position].datasheet?.let { myListener.onPartListClick(it) }
         }
-    }
-
-    interface OnPartClickListener {
-        fun onPartListClick(position: String)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PartViewHolder {

@@ -5,12 +5,11 @@ import android.os.Bundle
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.github.barteksc.pdfviewer.PDFView
 import com.github.barteksc.pdfviewer.util.FitPolicy
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,8 +42,10 @@ class MainActivity : AppCompatActivity() {
         queryResults.close()
 
         val adapter = PartAdapter(resultList, this)
-        parts_list_view.layoutManager = LinearLayoutManager(this)
-        parts_list_view.adapter = adapter
+
+        val partsListView = findViewById<RecyclerView>(R.id.parts_list_view)
+        partsListView.layoutManager = LinearLayoutManager(this)
+        partsListView.adapter = adapter
 
         // pdf viewer initializing
         pdfViewer()
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pdfViewer(fileName: String = "sample.pdf") {
+        val pdfView = findViewById<PDFView>(R.id.pdfView)
         pdfView.fromAsset(fileName)
             .enableSwipe(true)
             .swipeHorizontal(false)
